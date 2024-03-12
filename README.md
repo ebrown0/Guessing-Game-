@@ -1,5 +1,10 @@
-# ruby-cli-template
+# Guessing Game CLI
 
-Use this repository as a template for your Ruby CLI (command line interface) project.
+A command line linterface app to simulate a guessing game.
 
-- Ruby version: `3.2.1`
+# Usage
+
+- run app.rb in the terminal. 
+- Try to guess at least one of the random numbers. 
+- You start with ten guesses.
+- You will receive a hint when you have 5 guesses left.
