@@ -1,12 +1,15 @@
-class GusessGame
+class GuessGame
 
-  
   attr_accessor :guess1, :guess2, :number1, :number2, :guess_list
 
   def initialize
 
     #Has no parameters, but initialize 2 random numbers 
-    #and and empty string accumulator for the guesses
+    #and and empty string accumulator for the guesses and uses the helper 
+    #to kicktart the game.
+
+    puts "Welcome to the guessing game. You have 10 guesses."
+    puts
 
     self.number1 = rand(100)
 
@@ -14,51 +17,64 @@ class GusessGame
 
     self.guess_list = ""
 
+    self.guess_numbers_helper
+
+  end
+
+  def guess_numbers_helper
+
+    #helper method to make prompt the user for input
+
+    puts "Guess a number:"
+    self.guess1 = gets.chomp
+    puts 
+
+    puts "Guess another number:"
+    self.guess2 = gets.chomp
+    puts 
+
   end
 
   def guess_numbers
 
-    puts "Welcome to the guessing game. You have 10 guesses."
-    puts
-
     #guess count accumulator
     guess_count = 0
 
-    pp self.number1
-
-    pp self.number2
-
     #runs while the guesses are under 10
     while guess_count < 10 
+      
+      #makes sure the user input is integers
+      while self.guess1.to_i.to_s != self.guess1 or self.guess2.to_i.to_s != self.guess2
 
-      #prompts the user to enter a number
-      puts "Guess a number:"
-      guess1 = gets
-      puts 
+        puts "Please enter integers."
+        puts
 
-      puts "Guess another number:"
-      guess2 = gets
-      puts 
+        self.guess_numbers_helper
 
+      end
+      
       #adds one after a round of 2 guesses
       guess_count += 1
 
       #adds the guesses to the guess_list accumulator separated by a comma
-      self.guess_list = self.guess_list + guess1.to_s.strip + ", " + guess2.to_s.strip + ", "
+      self.guess_list = self.guess_list + self.guess1.to_s.strip + ", " + self.guess2.to_s.strip + ", "
 
       #if they guess either number they will win
-      if guess1.to_i == number1 or guess1.to_i == number2 or guess2.to_i == number1 or guess2.to_i == number2
+      if self.guess1.to_i == number1 or self.guess1.to_i == number2 or self.guess2.to_i == number1 or self.guess2.to_i == number2
 
-        puts 'DING DING DING, YOU WIN!'
-        return "It took you #{guess_count} tries."
+        puts 'DING DING DING, YOU WIN!' 
+
+        return "It took you #{guess_count * 2} guesses."
         
       end
 
       #prints the amount of guesses the end user has left only if the guesses has not reached 10
-      if guess_count < 10 and guess1.to_i != number1 and guess1.to_i != number2 and guess2.to_i != number1 and guess2.to_i != number2 
+      if guess_count < 10 and self.guess1.to_i != number1 and self.guess1.to_i != number2 and self.guess2.to_i != number1 and self.guess2.to_i != number2 
 
         puts "No try Again! you have #{10 - guess_count} guesses left"
         puts 
+
+        self.guess_numbers_helper
 
       end
 
@@ -76,7 +92,9 @@ class GusessGame
     #and what the numbers were. 
     if guess_count == 10
 
-      puts "You guessed: #{self.guess_list[0..self.guess_list.length.to_i - 3]}. The numbers were actually #{number1.to_s} and #{number2.to_s}."
+      #add and in between the last two numbers
+      puts "You guessed: #{self.guess_list[0..self.guess_list.length.to_i - 6]} and #{self.guess_list.split(", ")[-1].to_s}. The numbers were actually #{number1.to_s} and #{number2.to_s}."
+
       return "You are out of guesses, therefore, lose."
       
     end
@@ -108,7 +126,6 @@ class GusessGame
 
 end
 
-first = GusessGame.new
+game1 = GuessGame.new
 
-pp first.guess_numbers()
- 
+#pp game1.guess_numbers
