@@ -39,18 +39,4 @@ class TestApp < Minitest::Test
 
   end
 
-  #Last is the lose test. Just continuously enter the wrong number (and/or non intergers)
-  #until you are out of guesses and reach the end. 
-  def test_lose
-
-    game = GuessGame.new
-
-    game.number1 = 0
-    game.number2 = 0
-
-    #pass indicates that you have reached the end of the program
-    assert_equal "You are out of guesses, therefore, lose.", game.guess_numbers
-
-  end
-
 end

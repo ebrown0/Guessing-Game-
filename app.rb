@@ -128,4 +128,4 @@ end
 
 game1 = GuessGame.new
 
-#pp game1.guess_numbers
+pp game1.guess_numbers
